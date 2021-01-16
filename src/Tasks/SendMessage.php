@@ -98,14 +98,14 @@ class SendMessage extends Thread
         $random = rand() % Defines::NUMBER_OF_API;
         if ($random == Defines::FIRST_API) {
             $res = $this->sendFirstAPI($number);
-            if ($res) {
+            if ($res->getStatusCode() == Defines::SUCCEED_STATUS) {
                 $this->finalizeSuccess(Defines::FIRST_API);
                 return true;
             }
             $this->info->setFirstAPIFail($this->info->getFirstAPIFail() + 1);
             $this->generalInfo->setFirstAPIFail($this->generalInfo->getFirstAPIFail() + 1);
             $res = $this->sendSecondAPI($number);
-            if ($res) {
+            if ($res->getStatusCode() == Defines::SUCCEED_STATUS) {
                 $this->finalizeSuccess(Defines::SECOND_API);
                 return true;
             }
