@@ -92,6 +92,9 @@ class SendMessage extends Thread
 
     private function requestAPI(string $number) : bool
     {
+        /**
+         * Use randomness for load balancing
+         */
         $random = rand() % Defines::NUMBER_OF_API;
         if ($random == Defines::FIRST_API) {
             $res = $this->sendFirstAPI($number);
